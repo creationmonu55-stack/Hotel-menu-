@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grand Pavilion - Official Menu</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+:root{
+ --zomato-red:#E23744;--peppercorn-black:#1C1C1C;--feta-white:#fff;
+ --grey-50:#FCFCFC;--grey-100:#F8F8F8;--grey-200:#E8E8E8;--grey-300:#CFCFCF;
+ --grey-600:#828282;--grey-700:#696969;--success-green:#24963F;--warning-orange:#F4A000;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+body{background:var(--grey-100);color:var(--peppercorn-black);padding-bottom:90px}
+button,input{font:inherit}button{cursor:pointer}
+header{background:#fff;padding:14px 16px;border-bottom:1px solid var(--grey-200);position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.02)}
+.header-top{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.search-box{display:flex;align-items:center;background:var(--grey-100);border:1px solid var(--grey-200);border-radius:12px;padding:10px 14px;flex:1}
+.search-box input{border:0;outline:0;width:100%;margin-left:10px;font-size:.9rem;color:var(--peppercorn-black);background:transparent}
+.veg-mode-container{display:flex;flex-direction:column;align-items:center;gap:2px}.veg-mode-label{font-size:.6rem;font-weight:700;letter-spacing:.5px}
+.switch{position:relative;display:inline-block;width:40px;height:20px}.switch input{opacity:0;width:0;height:0}
+.slider-toggle{position:absolute;inset:0;cursor:pointer;background:var(--grey-300);transition:.3s;border-radius:20px}
+.slider-toggle:before{position:absolute;content:"";height:16px;width:16px;left:2px;bottom:2px;background:#fff;transition:.3s;border-radius:50%}
+input:checked+.slider-toggle{background:var(--success-green)}input:checked+.slider-toggle:before{transform:translateX(20px)}
+.categories-scroll{display:flex;gap:12px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}.categories-scroll::-webkit-scrollbar{display:none}
+.cat-chip{background:var(--grey-100);border:1px solid var(--grey-200);padding:6px 14px;border-radius:20px;cursor:pointer;white-space:nowrap;font-size:.82rem;font-weight:500;color:var(--grey-700);transition:.2s}
+.cat-chip.active,.cat-chip:hover{background:#FFF5F6;color:var(--zomato-red);border-color:var(--zomato-red);font-weight:600}
+.container{max-width:650px;margin:0 auto;padding:15px}
+.table-pill{background:#fff;border:1px solid var(--grey-200);border-radius:10px;padding:9px 12px;margin-bottom:14px;font-size:12px;font-weight:700}
+.table-pill span{color:var(--zomato-red)}
+.carousel-section{margin-bottom:24px}.carousel-title-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.carousel-title{font-size:1.1rem;font-weight:700;display:flex;align-items:center;gap:8px}
+.horizontal-slider{display:flex;gap:14px;overflow-x:auto;padding-bottom:8px;scrollbar-width:none}.horizontal-slider::-webkit-scrollbar{display:none}
+.promo-card{min-width:160px;max-width:160px;background:#fff;border:1px solid var(--grey-200);border-radius:12px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.03);flex-shrink:0}
+.promo-img-wrap{width:100%;height:110px;background:var(--grey-200)}.promo-img-wrap img{width:100%;height:100%;object-fit:cover}
+.promo-content{padding:10px}.promo-name{font-size:.88rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:4px}
+.promo-footer{display:flex;justify-content:space-between;align-items:center;margin-top:6px}.promo-price{font-size:.9rem;font-weight:700}
+.promo-add-btn{background:#FFF5F6;border:1px solid var(--zomato-red);color:var(--zomato-red);padding:4px 10px;border-radius:6px;font-weight:700;font-size:.72rem}
+h2.section-title{font-size:1.15rem;font-weight:700;margin:24px 0 12px;border-left:4px solid var(--zomato-red);padding-left:10px}
+.menu-grid{display:grid;grid-template-columns:1fr;gap:14px}
+.food-card{background:#fff;border:1px solid var(--grey-200);border-radius:12px;padding:12px;display:flex;gap:14px;box-shadow:0 2px 6px rgba(0,0,0,.02)}
+.food-img-wrap{width:100px;height:100px;border-radius:8px;overflow:hidden;flex-shrink:0;background:var(--grey-200);position:relative}.food-img-wrap img{width:100%;height:100%;object-fit:cover}
+.diet-badge{position:absolute;top:6px;left:6px;background:#fff;padding:3px;border-radius:3px;box-shadow:0 2px 4px rgba(0,0,0,.1)}
+.dot{width:8px;height:8px;border:2px solid;border-radius:2px;display:flex;align-items:center;justify-content:center}.dot.veg{border-color:var(--success-green)}.dot.veg:after{content:'';width:3px;height:3px;background:var(--success-green);border-radius:50%}.dot.nonveg{border-color:var(--zomato-red)}.dot.nonveg:after{content:'';width:3px;height:3px;background:var(--zomato-red);border-radius:50%}
+.food-info{display:flex;flex-direction:column;justify-content:space-between;flex:1;min-width:0}.food-title{font-size:1rem;font-weight:700;margin-bottom:2px}
+.food-meta{display:flex;align-items:center;gap:8px;font-size:.75rem;color:var(--grey-600);margin-bottom:6px}.rating-pill{background:var(--success-green);color:#fff;padding:1px 5px;border-radius:4px;font-weight:700;font-size:.68rem}
+.food-footer{display:flex;justify-content:space-between;align-items:center;gap:8px}.food-price{font-size:1rem;font-weight:700}.add-btn{background:#fff;border:1px solid var(--zomato-red);color:var(--zomato-red);padding:6px 16px;border-radius:6px;font-weight:700;font-size:.8rem}
+.add-btn:hover,.promo-add-btn:hover{background:var(--zomato-red);color:#fff}
+.cart-bar{position:fixed;bottom:0;left:0;width:100%;background:var(--peppercorn-black);color:#fff;padding:14px 20px;display:none;justify-content:space-between;align-items:center;box-shadow:0 -4px 20px rgba(0,0,0,.15);z-index:1000}
+.view-cart-btn{background:var(--zomato-red);color:#fff;border:0;padding:10px 20px;border-radius:8px;font-weight:700;font-size:.9rem}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2000;display:none;align-items:flex-end;justify-content:center}.overlay.show{display:flex}
+.sheet{width:min(650px,100%);max-height:90vh;overflow:auto;background:#fff;border-radius:20px 20px 0 0;padding:20px}
+.sheet-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.sheet h3{font-size:20px}.icon-btn{border:0;background:var(--grey-100);width:36px;height:36px;border-radius:50%}
+.cart-row{display:flex;gap:10px;padding:12px 0;border-bottom:1px solid var(--grey-200)}.cart-row-main{flex:1}.cart-row-name{font-weight:700;font-size:14px}.cart-row-price{font-size:12px;color:var(--grey-600);margin-top:4px}
+.qty-controls{display:flex;align-items:center;gap:8px}.qty-btn{border:1px solid var(--grey-200);background:#fff;width:30px;height:30px;border-radius:7px;font-weight:800}
+.cart-summary{padding-top:15px}.summary-line{display:flex;justify-content:space-between;margin:7px 0;font-size:13px}.summary-line.total{font-size:17px;font-weight:800;padding-top:8px;border-top:1px solid var(--grey-200)}
+.place-btn{width:100%;border:0;background:var(--zomato-red);color:#fff;border-radius:10px;padding:14px;margin-top:14px;font-weight:800}.place-btn:disabled{opacity:.55;cursor:not-allowed}
+.status-card{background:var(--grey-100);border-radius:14px;padding:16px;margin-top:10px}.status-big{font-size:18px;font-weight:800}.status-sub{color:var(--grey-600);font-size:12px;margin-top:5px}.status-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--warning-orange);margin-right:7px}.status-actions{display:flex;gap:8px;margin-top:14px}.secondary-btn{flex:1;border:1px solid var(--grey-200);background:#fff;border-radius:9px;padding:11px;font-weight:700}
+.notice{padding:10px 12px;border-radius:10px;font-size:12px;margin-bottom:12px;background:#FFF8E9;color:#6b5500}.error{background:#FFF0F1;color:#B42318}
+@media(max-width:420px){.food-img-wrap{width:88px;height:88px}.food-title{font-size:.92rem}.food-card{gap:10px}.add-btn{padding:6px 12px}.sheet{padding:16px}}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-top">
+    <div class="search-box">
+      <i class="fa-solid fa-magnifying-glass" style="color:var(--grey-600)"></i>
+      <input id="searchInput" type="text" placeholder="Search dish, paneer, mutton...">
+    </div>
+    <div class="veg-mode-container">
+      <span class="veg-mode-label">VEG MODE</span>
+      <label class="switch">
+        <input type="checkbox" id="vegModeToggle">
+        <span class="slider-toggle"></span>
+      </label>
+    </div>
+  </div>
+  <div class="categories-scroll" id="categoryTabs">
+    <div class="cat-chip active" data-category="All">All Items</div>
+    <div class="cat-chip" data-category="Veg Starters">Veg Starters</div>
+    <div class="cat-chip" data-category="Paneer Special">Paneer Special</div>
+    <div class="cat-chip" data-category="Chicken Starters">Chicken Starters</div>
+    <div class="cat-chip" data-category="Chicken Gravy">Chicken Gravy</div>
+    <div class="cat-chip" data-category="Mutton Boneless">Mutton Boneless</div>
+    <div class="cat-chip" data-category="Rice & Noodles">Rice & Noodles</div>
+    <div class="cat-chip" data-category="Beverages">Cold Drinks & Water</div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="table-pill">
+    <i class="fa-solid fa-chair"></i>
+    Table: <span id="tableNumber">Not set</span>
+  </div>
+
+  <div id="noticeArea"></div>
+
+  <div id="slidersContainer">
+    <div class="carousel-section" id="vegSliderSection">
+      <div class="carousel-title-row">
+        <div class="carousel-title"><i class="fa-solid fa-fire" style="color:var(--warning-orange)"></i> Veg Best Sellers</div>
+      </div>
+      <div class="horizontal-slider" id="vegSlider"></div>
+    </div>
+
+    <div class="carousel-section" id="nonVegSliderSection">
+      <div class="carousel-title-row">
+        <div class="carousel-title"><i class="fa-solid fa-fire" style="color:var(--zomato-red)"></i> Non-Veg Best Sellers</div>
+      </div>
+      <div class="horizontal-slider" id="nonVegSlider"></div>
+    </div>
+  </div>
+
+  <div id="menuWrapper"></div>
+</div>
+
+<div class="cart-bar" id="cartBar">
+  <div><span id="cartCount">0</span> items &nbsp;|&nbsp; <span id="cartTotal" style="font-weight:700">₹0</span></div>
+  <button class="view-cart-btn" id="viewCartBtn">View Cart</button>
+</div>
+
+<div class="overlay" id="cartOverlay">
+  <div class="sheet">
+    <div class="sheet-head">
+      <h3>Your Order</h3>
+      <button class="icon-btn" id="closeCartBtn"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div id="cartRows"></div>
+    <div class="cart-summary">
+      <div class="summary-line"><span>Items</span><span id="summaryItems">0</span></div>
+      <div class="summary-line total"><span>Total</span><span id="summaryTotal">₹0</span></div>
+      <button class="place-btn" id="placeOrderBtn">PLACE ORDER</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="trackingOverlay">
+  <div class="sheet">
+    <div class="sheet-head">
+      <h3>Order Tracking</h3>
+      <button class="icon-btn" id="closeTrackingBtn"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div id="trackingContent"></div>
+  </div>
+</div>
+
+<script type="module">
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+/* =========================================================
+   1) SUPABASE CONFIG
+   Same project values must be used in manager.html.
+   ========================================================= */
+const SUPABASE_URL = "https://qrquqzmfxjshhuxzkbjt.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_pFzCmB8G_Or4_tbOrshr_w_Sugyqugy";
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+/* =========================================================
+   2) MENU DATA
+   Add the rest of your menu objects here if you have more.
+   ========================================================= */
+const menuDatabase = [
+ {id:1,name:"Veg. Spring Roll",category:"Veg Starters",isVeg:true,price:170,rating:4.3,desc:"Crispy rolls stuffed with seasoned vegetables.",bestSeller:true,image:"https://images.unsplash.com/photo-1548365328-8c6db32c3bb6?w=400&auto=format&fit=crop"},
+ {id:2,name:"Veg. Crispy",category:"Veg Starters",isVeg:true,price:170,rating:4.2,desc:"Assorted vegetables fried crisp and tossed.",bestSeller:false,image:"https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&auto=format&fit=crop"},
+ {id:3,name:"Veg. Chinese Bhel",category:"Veg Starters",isVeg:true,price:110,rating:4.1,desc:"Crunchy fried noodles tossed with tangy schezwan.",bestSeller:false,image:"https://images.unsplash.com/photo-1552611052-33e04de081de?w=400&auto=format&fit=crop"},
+ {id:4,name:"Veg. Manchurian Dry",category:"Veg Starters",isVeg:true,price:170,rating:4.4,desc:"Deep-fried veggie dumplings tossed in thick soy-garlic.",bestSeller:true,image:"https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=400&auto=format&fit=crop"},
+ {id:5,name:"Veg. Chilly Dry",category:"Veg Starters",isVeg:true,price:170,rating:4.2,desc:"Crispy veg balls tossed with green chillies.",bestSeller:false,image:"https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&auto=format&fit=crop"},
+ {id:6,name:"Veg. Hot Garlic Sauce",category:"Veg Starters",isVeg:true,price:170,rating:4.0,desc:"Fresh veggies cooked in spicy pungent garlic sauce.",bestSeller:false,image:"https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&auto=format&fit=crop"},
+ {id:7,name:"Veg. Schezwan Sauce",category:"Veg Starters",isVeg:true,price:180,rating:4.3,desc:"Spicy fiery schezwan stir fry preparation.",bestSeller:false,image:"https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&auto=format&fit=crop"},
+ {id:8,name:"Paneer Manchurian Dry",category:"Paneer Special",isVeg:true,price:190,rating:4.5,desc:"Batter-coated paneer cubes in tangy manchurian.",bestSeller:false,image:"https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=400&auto=format&fit=crop"},
+ {id:9,name:"Paneer Chilly Dry",category:"Paneer Special",isVeg:true,price:190,rating:4.6,desc:"Classic pub style spicy tossed paneer cubes.",bestSeller:true,image:"https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&auto=format&fit=crop"},
+ {id:10,name:"Paneer Crispy",category:"Paneer Special",isVeg:true,price:190,rating:4.4,desc:"Crunchy crumb-fried paneer strips spiced.",bestSeller:false,image:"https://images.unsplash.com/photo-1599487488170-deddd26cef07?w=400&auto=format&fit=crop"},
+ {id:11,name:"Paneer 65",category:"Paneer Special",isVeg:true,price:190,rating:4.3,desc:"South-Indian style spiced deep-fried paneer.",bestSeller:false,image:"https://images.unsplash.com/photo-1633964913295-ceb43826e7c9?w=400&auto=format&fit=crop"},
+ {id:12,name:"Paneer Tikka",category:"Paneer Special",isVeg:true,price:240,rating:4.7,desc:"Tandoor-roasted marinated paneer with hung curd.",bestSeller:true,image:"https://images.unsplash.com/photo-1599487488170-deddd26cef07?w=400&auto=format&fit=crop"},
+ {id:13,name:"Paneer Haryali Tikka",category:"Paneer Special",isVeg:true,price:250,rating:4.5,desc:"Mint and coriander infused tandoori paneer.",bestSeller:false,image:"https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=400&auto=format&fit=crop"},
+ {id:14,name:"Shahi Paneer Tikka",category:"Paneer Special",isVeg:true,price:295,rating:4.8,desc:"Rich royal preparation of malai stuffed tikka.",bestSeller:false,image:"https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=400&auto=format&fit=crop"},
+ {id:15,name:"Paneer Malai Tikka",category:"Paneer Special",isVeg:true,price:280,rating:4.7,desc:"Melt-in-mouth creamy cashew paste paneer kebabs.",bestSeller:true,image:"https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&auto=format&fit=crop"},
+ {id:16,name:"Paneer Seekh Kebab",category:"Paneer Special",isVeg:true,price:250,rating:4.4,desc:"Minced paneer skewers cooked over charcoal.",bestSeller:false,image:"https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&auto=format&fit=crop"},
+ {id:17,name:"Chicken Schezwan Dry",category:"Chicken Starters",isVeg:false,price:190,rating:4.5,desc:"Juicy chicken chunks tossed in schezwan chili.",bestSeller:true,image:"https://images.unsplash.com/photo-1610057099431-d7a8e932ab5d?w=400&auto=format&fit=crop"},
+ {id:18,name:"Chicken Spring Roll",category:"Chicken Starters",isVeg:false,price:190,rating:4.3,desc:"Crispy rolls packed with minced chicken.",bestSeller:false,image:"https://images.unsplash.com/photo-1562967914-608f82629710?w=400&auto=format&fit=crop"},
+ {id:19,name:"Tandoori Chicken Chilly",category:"Chicken Starters",isVeg:false,price:220,rating:4.7,desc:"Smoky tandoori chicken pieces in spicy sauce.",bestSeller:false,image:"https://images.unsplash.com/photo-1599487488170-deddd26cef07?w=400&auto=format&fit=crop"},
+ {id:20,name:"Chicken Tikka",category:"Chicken Starters",isVeg:false,price:230,rating:4.8,desc:"Classic boneless chicken chunks charred in oven.",bestSeller:true,image:"https://images.unsplash.com/photo-1599487488170-deddd26cef07?w=400&auto=format&fit=crop"},
+ {id:21,name:"Chi. Pahadi Tikka",category:"Chicken Starters",isVeg:false,price:230,rating:4.6,desc:"Herby green spiced tandoori chicken tikka.",bestSeller:false,image:"https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&auto=format&fit=crop"},
+ {id:22,name:"Chi. Rashmi Tikka",category:"Chicken Starters",isVeg:false,price:250,rating:4.7,desc:"Creamy textured delicate chicken tikka.",bestSeller:false,image:"https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=400&auto=format&fit=crop"},
+ {id:23,name:"Chi. Shahi Tikka",category:"Chicken Starters",isVeg:false,price:280,rating:4.9,desc:"Rich royal style roasted chicken kebabs.",bestSeller:false,image:"https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=400&auto=format&fit=crop"},
+ {id:24,name:"Chi. Seekh Kebab",category:"Chicken Starters",isVeg:false,price:230,rating:4.5,desc:"Minced spiced chicken skewers.",bestSeller:false,image:"https://images.unsplash.com/photo-1544025162-d76694265947?w=400&auto=format&fit=crop"},
+ {id:25,name:"Chi. Banjara Kebab",category:"Chicken Starters",isVeg:false,price:250,rating:4.6,desc:"Spiced rustic chicken preparation from tandoor.",bestSeller:false,image:"https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=400&auto=format&fit=crop"},
+ {id:26,name:"Chi. Kofta Masala",category:"Chicken Gravy",isVeg:false,price:190,rating:4.4,desc:"Minced chicken meatballs in rich gravy.",bestSeller:false,image:"https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=400&auto=format&fit=crop"},
+ {id:27,name:"Chi. Hariyali",category:"Chicken Gravy",isVeg:false,price:200,rating:4.5,desc:"Chicken cooked in vibrant spinach gravy.",bestSeller:false,image:"https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&auto=format&fit=crop"},
+ {id:28,name:"Chi. Nawabi",category:"Chicken Gravy",isVeg:false,price:200,rating:4.7,desc:"Rich creamy white gravy with delicate spices.",bestSeller:false,image:"https://images.unsplash.com/photo-1633964913295-ceb43826e7c9?w=400&auto=format&fit=crop"},
+ {id:29,name:"Chi. Tikka Korma",category:"Chicken Gravy",isVeg:false,price:180,rating:4.3,desc:"Tandoori chicken tikka in buttery gravy.",bestSeller:true,image:"https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=400&auto=format&fit=crop"},
+ {id:30,name:"Chi. Handi",category:"Chicken Gravy",isVeg:false,price:165,rating:4.2,desc:"Traditional slow-cooked earthen pot curry.",bestSeller:false,image:"https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=400&auto=format&fit=crop"},
+ {id:31,name:"Chi. Kadai",category:"Chicken Gravy",isVeg:false,price:165,rating:4.4,desc:"Stir-fried chicken chunks with fresh coriander.",bestSeller:false,image:"https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=400&auto=format&fit=crop"},
+ {id:32,name:"Murg Musallam (Full)",category:"Chicken Gravy",isVeg:false,price:499,rating:4.9,desc:"Whole chicken stuffed with minced meat & eggs.",bestSeller:true,image:"https://images.unsplash.com/photo-1532550907401-a500c9a57435?w=400&auto=format&fit=crop"},
+ {id:33,name:"Murg Musallam (Half)",category:"Chicken Gravy",isVeg:false,price:300,rating:4.8,desc:"Half portion of rich royal Murg Musallam.",bestSeller:false,image:"https://images.unsplash.com/photo-1532550907401-a500c9a57435?w=400&auto=format&fit=crop"},
+ {id:34,name:"Mutton Angara",category:"Mutton Boneless",isVeg:false,price:240,rating:4.8,desc:"Smoky spicy charcoal flavored mutton curry.",bestSeller:true,image:"https://images.unsplash.com/photo-1544025162-d76694265947?w=400&auto=format&fit=crop"},
+ {id:35,name:"Mutton Tufani",category:"Mutton Boneless",isVeg:false,price:250,rating:4.6,desc:"Extremely spicy and flavorful mutton preparation.",bestSeller:false,image:"https://images.unsplash.com/photo-1544025162-d76694265947?w=400&auto=format&fit=crop"},
+ {id:36,name:"Mutton Dabbagosh",category:"Mutton Boneless",isVeg:false,price:200,rating:4.7,desc:"Tender boneless mutton slow-cooked in sealed pot.",bestSeller:false,image:"https://images.unsplash.com/photo-1544025162-d76694265947?w=400&auto=format&fit=crop"},
+ {id:37,name:"Mutton Hyderabadi",category:"Mutton Boneless",isVeg:false,price:220,rating:4.5,desc:"Mint and fried onion infused rich mutton gravy.",bestSeller:false,image:"https://images.unsplash.com/photo-1544025162-d76694265947?w=400&auto=format&fit=crop"},
+ {id:38,name:"Mutton Makhanwala",category:"Mutton Boneless",isVeg:false,price:180,rating:4.4,desc:"Soft mutton pieces in velvety tomato butter gravy.",bestSeller:false,image:"https://images.unsplash.com/photo-1544025162-d76694265947?w=400&auto=format&fit=crop"},
+ {id:39,name:"Veg. Fried Rice",category:"Rice & Noodles",isVeg:true,price:140,rating:4.2,desc:"Wok-tossed rice with garden vegetables.",bestSeller:false,image:"https://images.unsplash.com/photo-1512058564366-18510be2db19?w=400&auto=format&fit=crop"},
+ {id:40,name:"Veg. Schezwan Rice",category:"Rice & Noodles",isVeg:true,price:160,rating:4.3,desc:"Spicy schezwan wok tossed fried rice.",bestSeller:true,image:"https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400&auto=format&fit=crop"},
+ {id:41,name:"Veg. Triple Rice",category:"Rice & Noodles",isVeg:true,price:180,rating:4.6,desc:"Rice, noodles, and fried wontons in gravy.",bestSeller:true,image:"https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&auto=format&fit=crop"},
+ {id:42,name:"Veg. Singapore Rice",category:"Rice & Noodles",isVeg:true,price:170,rating:4.2,desc:"Curry-flavored aromatic rice noodles/rice.",bestSeller:false,image:"https://images.unsplash.com/photo-1512058564366-18510be2db19?w=400&auto=format&fit=crop"},
+ {id:43,name:"Coca-Cola (750ml)",category:"Beverages",isVeg:true,price:60,rating:4.8,desc:"Chilled refreshing carbonated soft drink.",bestSeller:false,image:"https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400&auto=format&fit=crop"},
+ {id:44,name:"Thums Up (750ml)",category:"Beverages",isVeg:true,price:60,rating:4.9,desc:"Strong thunder taste carbonated cola.",bestSeller:true,image:"https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=400&auto=format&fit=crop"},
+ {id:45,name:"Sprite (750ml)",category:"Beverages",isVeg:true,price:60,rating:4.7,desc:"Crisp lemon-lime refreshing drink.",bestSeller:false,image:"https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?w=400&auto=format&fit=crop"},
+ {id:46,name:"Packaged Drinking Water (1 Litre)",category:"Beverages",isVeg:true,price:20,rating:5.0,desc:"Pure mineral drinking water bottle.",bestSeller:false,image:"https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=400&auto=format&fit=crop"}
+];
+
+/* =========================================================
+   3) STATE
+   ========================================================= */
+let currentCategory = "All";
+let cart = [];
+let activeOrderId = localStorage.getItem("gp_active_order_id") || null;
+let customerToken = localStorage.getItem("gp_customer_token");
+
+if (!customerToken) {
+  customerToken = crypto.randomUUID();
+  localStorage.setItem("gp_customer_token", customerToken);
+}
+
+const params = new URLSearchParams(location.search);
+const tableNumber = params.get("table") || localStorage.getItem("gp_table_number") || "";
+
+if (tableNumber) localStorage.setItem("gp_table_number", tableNumber);
+document.getElementById("tableNumber").textContent = tableNumber || "Not set";
+
+/* =========================================================
+   4) HELPERS
+   ========================================================= */
+function esc(value) {
+  return String(value ?? "")
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;").replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+function money(value) {
+  return "₹" + Number(value || 0).toFixed(0);
+}
+
+function showNotice(message, error=false) {
+  const box = document.getElementById("noticeArea");
+  box.innerHTML = '<div class="notice '+(error ? "error" : "")+'">'+esc(message)+'</div>';
+  setTimeout(() => { box.innerHTML = ""; }, 3500);
+}
+
+function getCartCount() {
+  return cart.reduce((sum, x) => sum + x.quantity, 0);
+}
+
+function getCartTotal() {
+  return cart.reduce((sum, x) => sum + x.price * x.quantity, 0);
+}
+
+/* =========================================================
+   5) MENU RENDER
+   ========================================================= */
+function renderSliders(vegOnly, searchQuery) {
+  const matches = menuDatabase.filter(item => {
+    const search = item.name.toLowerCase().includes(searchQuery) || item.desc.toLowerCase().includes(searchQuery);
+    return item.bestSeller && search && (!vegOnly || item.isVeg);
+  });
+
+  const veg = matches.filter(x => x.isVeg);
+  const nonVeg = matches.filter(x => !x.isVeg);
+
+  document.getElementById("vegSliderSection").style.display = veg.length ? "" : "none";
+  document.getElementById("nonVegSliderSection").style.display = nonVeg.length ? "" : "none";
+
+  const card = item => `
+    <div class="promo-card">
+      <div class="promo-img-wrap"><img src="${esc(item.image)}" alt="${esc(item.name)}" loading="lazy"></div>
+      <div class="promo-content">
+        <div>
+          <div class="promo-name" title="${esc(item.name)}">${esc(item.name)}</div>
+          <div style="font-size:.7rem;color:var(--grey-600)">
+            <i class="fa-solid fa-star" style="color:var(--success-green);font-size:.6rem"></i> ${esc(item.rating)}
+          </div>
+        </div>
+        <div class="promo-footer">
+          <span class="promo-price">${money(item.price)}</span>
+          <button class="promo-add-btn" data-add="${item.id}">ADD</button>
+        </div>
+      </div>
+    </div>`;
+
+  document.getElementById("vegSlider").innerHTML = veg.map(card).join("");
+  document.getElementById("nonVegSlider").innerHTML = nonVeg.map(card).join("");
+}
+
+function renderMenu(items) {
+  const wrapper = document.getElementById("menuWrapper");
+  if (!items.length) {
+    wrapper.innerHTML = '<p style="text-align:center;color:var(--grey-600);margin-top:30px">No items found matching your search or filters.</p>';
+    return;
+  }
+
+  const categories = [...new Set(items.map(x => x.category))];
+  let html = "";
+
+  categories.forEach(cat => {
+    html += `<h2 class="section-title">${esc(cat)}</h2><div class="menu-grid">`;
+    items.filter(x => x.category === cat).forEach(item => {
+      html += `
+      <div class="food-card">
+        <div class="food-img-wrap">
+          <img src="${esc(item.image)}" alt="${esc(item.name)}" loading="lazy">
+          <div class="diet-badge"><div class="dot ${item.isVeg ? "veg" : "nonveg"}"></div></div>
+        </div>
+        <div class="food-info">
+          <div>
+            <div class="food-title">${esc(item.name)}</div>
+            <div class="food-meta">
+              <span class="rating-pill"><i class="fa-solid fa-star" style="font-size:.55rem"></i> ${esc(item.rating)}</span>
+              <span>•</span><span>Freshly Prepared</span>
+            </div>
+            <div style="font-size:.8rem;color:var(--grey-700);margin-bottom:8px;line-height:1.3">${esc(item.desc)}</div>
+          </div>
+          <div class="food-footer">
+            <span class="food-price">${money(item.price)}</span>
+            <button class="add-btn" data-add="${item.id}">ADD</button>
+          </div>
+        </div>
+      </div>`;
+    });
+    html += "</div>";
+  });
+  wrapper.innerHTML = html;
+}
+
+function applyFilters() {
+  const search = document.getElementById("searchInput").value.trim().toLowerCase();
+  const vegOnly = document.getElementById("vegModeToggle").checked;
+
+  renderSliders(vegOnly, search);
+
+  const filtered = menuDatabase.filter(item => {
+    const categoryMatch = currentCategory === "All" || item.category === currentCategory;
+    const searchMatch = item.name.toLowerCase().includes(search) || item.desc.toLowerCase().includes(search);
+    const vegMatch = !vegOnly || item.isVeg;
+    return categoryMatch && searchMatch && vegMatch;
+  });
+
+  renderMenu(filtered);
+}
+
+/* =========================================================
+   6) CART
+   ========================================================= */
+function addToCart(id) {
+  const item = menuDatabase.find(x => x.id === Number(id));
+  if (!item) return;
+
+  const existing = cart.find(x => x.id === item.id);
+  if (existing) existing.quantity++;
+  else cart.push({...item, quantity:1});
+
+  updateCartUI();
+}
+
+function changeQty(id, delta) {
+  const item = cart.find(x => x.id === Number(id));
+  if (!item) return;
+
+  item.quantity += delta;
+  if (item.quantity <= 0) cart = cart.filter(x => x.id !== Number(id));
+  updateCartUI();
+  renderCartSheet();
+}
+
+function updateCartUI() {
+  const count = getCartCount();
+  document.getElementById("cartBar").style.display = count ? "flex" : "none";
+  document.getElementById("cartCount").textContent = count;
+  document.getElementById("cartTotal").textContent = money(getCartTotal());
+}
+
+function renderCartSheet() {
+  const rows = document.getElementById("cartRows");
+  if (!cart.length) {
+    rows.innerHTML = '<p style="text-align:center;color:var(--grey-600);padding:25px">Your cart is empty.</p>';
+  } else {
+    rows.innerHTML = cart.map(item => `
+      <div class="cart-row">
+        <div class="cart-row-main">
+          <div class="cart-row-name">${esc(item.name)}</div>
+          <div class="cart-row-price">${money(item.price)} each</div>
+        </div>
+        <div class="qty-controls">
+          <button class="qty-btn" data-minus="${item.id}">−</button>
+          <strong>${item.quantity}</strong>
+          <button class="qty-btn" data-plus="${item.id}">+</button>
+        </div>
+      </div>`).join("");
+  }
+
+  document.getElementById("summaryItems").textContent = getCartCount();
+  document.getElementById("summaryTotal").textContent = money(getCartTotal());
+  document.getElementById("placeOrderBtn").disabled = !cart.length || !tableNumber;
+}
+
+function openCart() {
+  renderCartSheet();
+  document.getElementById("cartOverlay").classList.add("show");
+}
+function closeCart() { document.getElementById("cartOverlay").classList.remove("show"); }
+
+/* =========================================================
+   7) PLACE ORDER
+   Uses the SQL RPC so order + items are inserted together.
+   ========================================================= */
+async function placeOrder() {
+  if (!tableNumber) {
+    showNotice("QR/table number missing. Open this page using ?table=1", true);
+    return;
+  }
+  if (!cart.length) return;
+
+  const button = document.getElementById("placeOrderBtn");
+  button.disabled = true;
+  button.textContent = "PLACING ORDER...";
+
+  const items = cart.map(item => ({
+    item_name: item.name,
+    price: Number(item.price),
+    quantity: Number(item.quantity),
+    customization: {}
+  }));
+
+  const { data, error } = await supabase.rpc("create_order_with_items", {
+    p_table_number: String(tableNumber),
+    p_customer_token: customerToken,
+    p_total: Number(getCartTotal().toFixed(2)),
+    p_items: items
+  });
+
+  button.textContent = "PLACE ORDER";
+
+  if (error) {
+    console.error("PLACE ORDER ERROR:", error);
+    showNotice(error.message || "Could not place order", true);
+    button.disabled = false;
+    return;
+  }
+
+  const orderId = data;
+  activeOrderId = orderId;
+  localStorage.setItem("gp_active_order_id", orderId);
+
+  cart = [];
+  updateCartUI();
+  closeCart();
+  showTracking(orderId);
+  subscribeToOrder(orderId);
+}
+
+/* =========================================================
+   8) CUSTOMER REALTIME TRACKING
+   ========================================================= */
+let customerChannel = null;
+
+async function loadOrderStatus(orderId) {
+  const { data, error } = await supabase
+    .from("orders")
+    .select("id,table_number,status,estimated_minutes,total,created_at,updated_at")
+    .eq("id", orderId)
+    .eq("customer_token", customerToken)
+    .maybeSingle();
+
+  if (error) {
+    console.error("ORDER STATUS ERROR:", error);
+    return;
+  }
+  if (data) renderTracking(data);
+}
+
+function statusText(status) {
+  return {
+    pending:"Waiting for restaurant",
+    accepted:"Order accepted",
+    preparing:"Your food is being prepared",
+    ready:"Order is ready",
+    completed:"Order completed",
+    rejected:"Order rejected"
+  }[status] || status;
+}
+
+function statusMessage(status) {
+  return {
+    pending:"Restaurant is reviewing your order.",
+    accepted:"Kitchen has accepted your order.",
+    preparing:"Kitchen is preparing your food.",
+    ready:"Please collect your order from the restaurant.",
+    completed:"Thank you! Your order is complete.",
+    rejected:"Restaurant could not accept this order."
+  }[status] || "";
+}
+
+function renderTracking(order) {
+  const mins = order.estimated_minutes ? `<div class="status-sub">Estimated preparation: <strong>${esc(order.estimated_minutes)} min</strong></div>` : "";
+  const rejected = order.status === "rejected";
+  document.getElementById("trackingContent").innerHTML = `
+    <div class="status-card">
+      <div class="status-big">
+        <span class="status-dot" style="background:${rejected ? "var(--zomato-red)" : order.status === "ready" || order.status === "completed" ? "var(--success-green)" : "var(--warning-orange)"}"></span>
+        ${esc(statusText(order.status))}
+      </div>
+      <div class="status-sub">${esc(statusMessage(order.status))}</div>
+      ${mins}
+      <div class="status-sub" style="margin-top:10px">Table: <strong>${esc(order.table_number)}</strong></div>
+      <div class="status-sub">Order: <strong>#${esc(String(order.id).slice(0,8))}</strong></div>
+    </div>
+    <div class="status-actions">
+      <button class="secondary-btn" id="trackingCloseBtn">Close</button>
+    </div>`;
+
+  document.getElementById("trackingCloseBtn").onclick = () => {
+    document.getElementById("trackingOverlay").classList.remove("show");
+  };
+}
+
+async function showTracking(orderId) {
+  document.getElementById("trackingOverlay").classList.add("show");
+  document.getElementById("trackingContent").innerHTML =
+    '<div class="status-card"><div class="status-big">Loading order...</div><div class="status-sub">Connecting to restaurant.</div></div>';
+  await loadOrderStatus(orderId);
+}
+
+function subscribeToOrder(orderId) {
+  if (customerChannel) supabase.removeChannel(customerChannel);
+
+  customerChannel = supabase
+    .channel("customer-order-" + orderId)
+    .on("postgres_changes", {
+      event:"UPDATE",
+      schema:"public",
+      table:"orders",
+      filter:"id=eq." + orderId
+    }, payload => {
+      if (payload.new && payload.new.customer_token === customerToken) {
+        renderTracking(payload.new);
+      }
+    })
+    .subscribe(status => console.log("Customer realtime:", status));
+}
+
+/* =========================================================
+   9) EVENTS
+   ========================================================= */
+document.getElementById("searchInput").addEventListener("input", applyFilters);
+document.getElementById("vegModeToggle").addEventListener("change", applyFilters);
+
+document.getElementById("categoryTabs").addEventListener("click", e => {
+  const chip = e.target.closest(".cat-chip");
+  if (!chip) return;
+  currentCategory = chip.dataset.category;
+  document.querySelectorAll(".cat-chip").forEach(x => x.classList.remove("active"));
+  chip.classList.add("active");
+  applyFilters();
+});
+
+document.addEventListener("click", e => {
+  const add = e.target.closest("[data-add]");
+  if (add) addToCart(add.dataset.add);
+
+  const minus = e.target.closest("[data-minus]");
+  if (minus) changeQty(minus.dataset.minus, -1);
+
+  const plus = e.target.closest("[data-plus]");
+  if (plus) changeQty(plus.dataset.plus, 1);
+});
+
+document.getElementById("viewCartBtn").addEventListener("click", openCart);
+document.getElementById("closeCartBtn").addEventListener("click", closeCart);
+document.getElementById("placeOrderBtn").addEventListener("click", placeOrder);
+document.getElementById("closeTrackingBtn").addEventListener("click", () => {
+  document.getElementById("trackingOverlay").classList.remove("show");
+});
+
+document.getElementById("cartOverlay").addEventListener("click", e => {
+  if (e.target.id === "cartOverlay") closeCart();
+});
+
+/* =========================================================
+   10) INITIAL LOAD
+   ========================================================= */
+applyFilters();
+updateCartUI();
+
+if (!tableNumber) {
+  showNotice("Table number missing. QR link should look like: index.html?table=1", true);
+}
+
+if (activeOrderId) {
+  showTracking(activeOrderId);
+  subscribeToOrder(activeOrderId);
+}
+</script>
+</body>
+</html>
